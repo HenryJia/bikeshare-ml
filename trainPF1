@@ -1,0 +1,2 @@
+ year,month,date,time,time^5,season,holiday,workingday,weather,temp,atemp,humidity,windspeed,casual,registered,count
+
