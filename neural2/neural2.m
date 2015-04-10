@@ -20,7 +20,7 @@ testXb = load("original/testPF1_2.csv");
 
 alpha = 0.05;
 lambda = 0;
-iters = 2000;
+iters = 20000;
 plotIters = 40;
 
 mTrainA = length(Ya);
@@ -90,21 +90,25 @@ figure(1)
 scatter(1:mTrainA, Ya, "b")
 hold on
 plot(predictYaTrain, "r")
+hold off
 
 figure(2)
 scatter(1:mTrainB, Yb, "b")
 hold on
 plot(predictYbTrain, "r")
+hold off
 
 figure(3)
 scatter(Xa(:, 3), Ya, "b")
 hold on
 plot(Xa(:, 3), predictYaTrain, "r")
+hold off
 
 figure(4)
 scatter(Xb(:, 3), Yb, "b")
 hold on
 plot(Xb(:, 3), predictYbTrain, "r")
+hold off
 
 predictYaValidate = forwardPropagate(validateXa_norm, ThetaA1, ThetaA2, Ya);
 predictYbValidate = forwardPropagate(validateXb_norm, ThetaB1, ThetaB2, Yb);
