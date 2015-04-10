@@ -124,9 +124,11 @@ JBValidate += (sum(sum(ThetaB1(2:end, :) .^ 2)) + sum(sum(ThetaB1(2:end, :) .^ 2
 %pause;
 
 % Write To CSV
+%{
+predictYaTest = forwardPropagate(testXa_norm, ThetaA1, ThetaA2, Ya);
+predictYbTest = forwardPropagate(testXb_norm, ThetaB1, ThetaB2, Yb);
 
-%csvwrite("result3_1.csv", testXa3);
-%csvwrite("result3_2.csv", testXb3);
-
+csvwrite("result.csv", [predictYaTest; predictYbTest]);
+%}
 fprintf('Done. Press Enter\n');
 %pause;
