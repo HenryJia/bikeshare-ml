@@ -1,4 +1,4 @@
-function [predictYaTrain, predictYbTrain, predictYaValidate, predictYbValidate, predictYaTest, predictYbTest] = neural2
+function [predictYaTrain, predictYbTrain, predictYaValidate, predictYbValidate, predictYaTest, predictYbTest] = neural2_2
 %(scatterX, X, y, alpha, lambda, iter)
 
 % Load and normalise data
@@ -62,65 +62,65 @@ fprintf('Features Normalised. Initialise Thetas. Press Enter\n');
 ThetaA1 = abs(randInitializeWeights(11, 22));
 ThetaB1 = abs(randInitializeWeights(11, 22));
 
-ThetaA2 = abs(randInitializeWeights(22, 44));
-ThetaB2 = abs(randInitializeWeights(22, 44));
+ThetaA2 = abs(randInitializeWeights(22, 22));
+ThetaB2 = abs(randInitializeWeights(22, 22));
 
-ThetaA3 = abs(randInitializeWeights(44, 1));
-ThetaB3 = abs(randInitializeWeights(44, 1));
+ThetaA3 = abs(randInitializeWeights(22, 1));
+ThetaB3 = abs(randInitializeWeights(22, 1));
 
 % Calculate Thetas & Results For First Hidden Layer
 
 fprintf('Thetas initialise. Training. Press Enter\n');
 %pause;
 
-[ThetaA1, ThetaA2, ThetaA3] = train(Xa_norm, Ya_norm, ThetaA1, ThetaA2, ThetaA3, alpha, lambda, iters, scatterIters);
+%[ThetaA1, ThetaA2, ThetaA3] = train(Xa_norm, Ya_norm, ThetaA1, ThetaA2, ThetaA3, alpha, lambda, iters, scatterIters);
 [ThetaB1, ThetaB2, ThetaB3] = train(Xa_norm, Ya_norm, ThetaB1, ThetaB2, ThetaB3, alpha, lambda, iters, scatterIters);
 
 fprintf('Training Complete. Calculate Training Costs. Press Enter\n');
 pause;
 
-predictYaTrain = forwardPropagate(Xa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
+%predictYaTrain = forwardPropagate(Xa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
 predictYbTrain = forwardPropagate(Xb_norm, ThetaB1, ThetaB2, ThetaB3, Yb);
 
-JA = ((predictYaTrain - Ya)' * (predictYaTrain - Ya) )/ (2 * mTrainA);
+%JA = ((predictYaTrain - Ya)' * (predictYaTrain - Ya) )/ (2 * mTrainA);
 JB = ((predictYbTrain - Yb)' * (predictYbTrain - Yb) )/ (2 * mTrainB);
 
 % Add on the penalty for regularization
-JA += (sum(sum(ThetaA1(2:end, :) .^ 2)) + sum(sum(ThetaA2(2:end, :) .^ 2)) + sum(sum(ThetaA3(2:end, :) .^ 2))) * (lambda / (2 * mTrainA))
+%JA += (sum(sum(ThetaA1(2:end, :) .^ 2)) + sum(sum(ThetaA2(2:end, :) .^ 2)) + sum(sum(ThetaA3(2:end, :) .^ 2))) * (lambda / (2 * mTrainA))
 JB += (sum(sum(ThetaB1(2:end, :) .^ 2)) + sum(sum(ThetaB2(2:end, :) .^ 2)) + sum(sum(ThetaB3(2:end, :) .^ 2))) * (lambda / (2 * mTrainB))
-
+%{
 figure(1)
 scatter(1:mTrainA, Ya, "b")
 hold on
 scatter(1:mTrainA, predictYaTrain, "r")
 hold off
-
+%}
 figure(2)
 scatter(1:mTrainB, Yb, "b")
 hold on
 scatter(1:mTrainB, predictYbTrain, "r")
 hold off
-
+%{
 figure(3)
 scatter(Xa(:, 3), Ya, "b")
 hold on
 scatter(Xa(:, 3), predictYaTrain, "r")
 hold off
-
+%}
 figure(4)
 scatter(Xb(:, 3), Yb, "b")
 hold on
 scatter(Xb(:, 3), predictYbTrain, "r")
 hold off
 
-predictYaValidate = forwardPropagate(validateXa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
+%predictYaValidate = forwardPropagate(validateXa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
 predictYbValidate = forwardPropagate(validateXb_norm, ThetaB1, ThetaB2, ThetaB3, Yb);
 
-JAValidate = ((predictYaValidate - validateYa)' * (predictYaValidate - validateYa) )/ (2 * mValidateA);
+%JAValidate = ((predictYaValidate - validateYa)' * (predictYaValidate - validateYa) )/ (2 * mValidateA);
 JBValidate = ((predictYbValidate - validateYb)' * (predictYbValidate - validateYb) )/ (2 * mValidateB);
 
 % Add on the penalty for regularization
-JAValidate += (sum(sum(ThetaA1(2:end, :) .^ 2)) + sum(sum(ThetaA2(2:end, :) .^ 2)) + sum(sum(ThetaA3(2:end, :) .^ 2))) * (lambda / (2 * mValidateA))
+%JAValidate += (sum(sum(ThetaA1(2:end, :) .^ 2)) + sum(sum(ThetaA2(2:end, :) .^ 2)) + sum(sum(ThetaA3(2:end, :) .^ 2))) * (lambda / (2 * mValidateA))
 JBValidate += (sum(sum(ThetaB1(2:end, :) .^ 2)) + sum(sum(ThetaB2(2:end, :) .^ 2)) + sum(sum(ThetaB3(2:end, :) .^ 2))) * (lambda / (2 * mValidateB))
 
 %fprintf('Calculated Final Results. Write To CSV. Press Enter\n');
@@ -128,10 +128,10 @@ JBValidate += (sum(sum(ThetaB1(2:end, :) .^ 2)) + sum(sum(ThetaB2(2:end, :) .^ 2
 
 % Write To CSV
 
-predictYaTest = forwardPropagate(testXa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
+%predictYaTest = forwardPropagate(testXa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
 predictYbTest = forwardPropagate(testXb_norm, ThetaB1, ThetaB2, ThetaB3. Yb);
 
-csvwrite("result2.csv", [predictYaTest; predictYbTest]);
+csvwrite("result2_2.csv", predictYbTest);
 
 fprintf('Done. Press Enter\n');
 %pause;
