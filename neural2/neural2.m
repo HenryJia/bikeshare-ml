@@ -32,12 +32,12 @@ mValidateB = length(validateYb);
 fprintf('Data Loaded. Normalised Features And Add Bias Units. Press Enter\n');
 %pause;
 
-Xa_norm =  featureRescale(Xa);
-Xb_norm =  featureRescale(Xb);
-validateXa_norm =  featureRescale(validateXa);
-validateXb_norm =  featureRescale(validateXb);
-testXa_norm =  featureRescale(testXa);
-testXb_norm =  featureRescale(testXb);
+Xa_norm =  featureNormalize(Xa);
+Xb_norm =  featureNormalize(Xb);
+validateXa_norm =  featureNormalize(validateXa);
+validateXb_norm =  featureNormalize(validateXb);
+testXa_norm =  featureNormalize(testXa);
+testXb_norm =  featureNormalize(testXb);
 Ya_norm = featureRescale(Ya) - 1;
 Yb_norm = featureRescale(Yb) - 1;
 
