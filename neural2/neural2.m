@@ -1,5 +1,5 @@
 function [predictYaTrain, predictYbTrain, predictYaValidate, predictYbValidate, predictYaTest, predictYbTest] = neural2
-%(plotX, X, y, alpha, lambda, iter)
+%(scatterX, X, y, alpha, lambda, iter)
 
 % Load and normalise data
 
@@ -20,8 +20,8 @@ testXb = load("original/testPF1_2.csv");
 
 alpha = 0.05;
 lambda = 0;
-iters = 20000;
-plotIters = 40;
+iters = 2000;
+scatterIters = 40;
 
 mTrainA = length(Ya);
 mTrainB = length(Yb);
@@ -70,8 +70,8 @@ ThetaB2 = abs(randInitializeWeights(22, 1));
 fprintf('Thetas initialise. Training. Press Enter\n');
 %pause;
 
-[ThetaA1, ThetaA2] = train(Xa_norm, Ya_norm, ThetaA1, ThetaA2, alpha, lambda, iters, plotIters);
-[ThetaB1, ThetaB2] = train(Xa_norm, Ya_norm, ThetaB1, ThetaB2, alpha, lambda, iters, plotIters);
+[ThetaA1, ThetaA2] = train(Xa_norm, Ya_norm, ThetaA1, ThetaA2, alpha, lambda, iters, scatterIters);
+[ThetaB1, ThetaB2] = train(Xa_norm, Ya_norm, ThetaB1, ThetaB2, alpha, lambda, iters, scatterIters);
 
 fprintf('Training Complete. Calculate Training Costs. Press Enter\n');
 pause;
@@ -89,25 +89,25 @@ JB += (sum(sum(ThetaB1(2:end, :) .^ 2)) + sum(sum(ThetaB1(2:end, :) .^ 2))) * (l
 figure(1)
 scatter(1:mTrainA, Ya, "b")
 hold on
-plot(predictYaTrain, "r")
+scatter(1:mTrainA, predictYaTrain, "r")
 hold off
 
 figure(2)
 scatter(1:mTrainB, Yb, "b")
 hold on
-plot(predictYbTrain, "r")
+scatter(1:mTrainB, predictYbTrain, "r")
 hold off
 
 figure(3)
 scatter(Xa(:, 3), Ya, "b")
 hold on
-plot(Xa(:, 3), predictYaTrain, "r")
+scatter(Xa(:, 3), predictYaTrain, "r")
 hold off
 
 figure(4)
 scatter(Xb(:, 3), Yb, "b")
 hold on
-plot(Xb(:, 3), predictYbTrain, "r")
+scatter(Xb(:, 3), predictYbTrain, "r")
 hold off
 
 predictYaValidate = forwardPropagate(validateXa_norm, ThetaA1, ThetaA2, Ya);

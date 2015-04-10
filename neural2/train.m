@@ -1,8 +1,8 @@
 function [TrainedTheta1, TrainedTheta2] = train(X, Y, Theta1, Theta2, alpha, lambda, iters, plotIters, max)
 
 m = size(X, 1);
-J = 0;
-JAll = zeros(iters / plotIters, 1);
+%J = 0;
+%JAll = zeros(iters / plotIters, 1);
 
 TrainedTheta1 = Theta1;
 TrainedTheta2 = Theta2;
@@ -36,14 +36,14 @@ for i = 1:iters
     % Calculate small delta
     delta3 = a3 - Y;
     delta2 = (delta3 * Theta2')(:, 2:end)  .* (1 ./ z2);
-    ds3 = size(delta3);
-    ds2 = size(delta2);
+    %ds3 = size(delta3);
+    %ds2 = size(delta2);
     % Accumulate small delta to calculate big delta which is the partial derivatives
     Delta2 = delta3' * a2;
     Delta1 = delta2' * X;
 
-    Ds2 = size(Delta2);
-    Ds1 = size(Delta1);
+    %Ds2 = size(Delta2);
+    %Ds1 = size(Delta1);
     % Finish off the calculation and add on the penalty term for regularization
     Theta2_grad = Delta2' ./ m + (lambda/m) * [zeros(size(Theta2, 1), 1), Theta2(:, 2:end)];
     Theta1_grad = Delta1' ./ m + (lambda/m) * [zeros(size(Theta1, 1), 1), Theta1(:, 2:end)];
