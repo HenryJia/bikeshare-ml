@@ -5,16 +5,16 @@ function [predictYaTrain, predictYbTrain, predictYaValidate, predictYbValidate, 
 
 fprintf('Load Data\n');
 
-Xa = load("trainP7_1.csv");
-Xb = load("trainP7_2.csv");
+Xa = load("trainP7_1.csv")(:, [1, 3:end]);
+Xb = load("trainP7_2.csv")(:, [1, 3:end]);
 Ya = load("trainYP2_1.csv" );
 Yb = load("trainYP2_2.csv" );
-validateXa = load("validateP7_1.csv");
-validateXb = load("validateP7_2.csv");
+validateXa = load("validateP7_1.csv")(:, [1, 3:end]);
+validateXb = load("validateP7_2.csv")(:, [1, 3:end]);
 validateYa = load("validateY1.csv");
 validateYb = load("validateY2.csv");
-testXa = load("original/testPF1_1.csv");
-testXb = load("original/testPF1_2.csv");
+testXa = load("original/testPF1_1.csv")(:, [1, 3:end]);
+testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 
 % Set Important Variables:
 
@@ -59,14 +59,14 @@ testXb_norm = [ones(size(testXb_norm, 1) ,1), testXb_norm];
 fprintf('Features Normalised. Initialise Thetas. Press Enter\n');
 %pause;
 
-ThetaA1 = abs(randInitializeWeights(11, 22));
-ThetaB1 = abs(randInitializeWeights(11, 22));
+ThetaA1 = abs(randInitializeWeights(10, 20));
+ThetaB1 = abs(randInitializeWeights(10, 20));
 
-ThetaA2 = abs(randInitializeWeights(22, 22));
-ThetaB2 = abs(randInitializeWeights(22, 22));
+ThetaA2 = abs(randInitializeWeights(20, 40));
+ThetaB2 = abs(randInitializeWeights(20, 40));
 
-ThetaA3 = abs(randInitializeWeights(22, 1));
-ThetaB3 = abs(randInitializeWeights(22, 1));
+ThetaA3 = abs(randInitializeWeights(40, 1));
+ThetaB3 = abs(randInitializeWeights(40, 1));
 
 % Calculate Thetas & Results For First Hidden Layer
 
