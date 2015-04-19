@@ -6,7 +6,7 @@ m = size(X, 1);
 
 TrainedTheta1 = Theta1;
 TrainedTheta2 = Theta2;
-
+Y = repmat(Y, 1, size(Theta2, 2));
 %count = 1;
 
 for i = 1:iters

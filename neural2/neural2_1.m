@@ -1,20 +1,20 @@
-function [predictYaTrain, predictYbTrain, predictYaValidate, predictYbValidate, predictYaTest, predictYbTest] = neural2_1
+function [ThetaA1, ThetaB1, ThetaA2, ThetaB2] = neural2_1
 %(scatterX, X, y, alpha, lambda, iter)
 
 % Load and normalise data
 
 fprintf('Load Data\n');
 
-Xa = load("trainP7_1.csv")(:, [1, 3:end]) * 20000;
-Xb = load("trainP7_2.csv")(:, [1, 3:end]) * 20000;
+Xa = load("trainP7_1.csv")(:, [1, 3:end]);
+Xb = load("trainP7_2.csv")(:, [1, 3:end]);
 Ya = load("trainYP2_1.csv" );
 Yb = load("trainYP2_2.csv" );
-validateXa = load("validateP7_1.csv")(:, [1, 3:end]) * 20000;
-validateXb = load("validateP7_2.csv")(:, [1, 3:end]) * 20000;
+validateXa = load("validateP7_1.csv")(:, [1, 3:end]);
+validateXb = load("validateP7_2.csv")(:, [1, 3:end]);
 validateYa = load("validateY1.csv");
 validateYb = load("validateY2.csv");
-testXa = load("original/testPF1_1.csv")(:, [1, 3:end]) * 20000;
-testXb = load("original/testPF1_2.csv")(:, [1, 3:end]) * 20000;
+testXa = load("original/testPF1_1.csv")(:, [1, 3:end]);
+testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 
 % Set Important Variables:
 
@@ -38,8 +38,8 @@ validateXa_norm =  featureNormalize(validateXa);
 validateXb_norm =  featureNormalize(validateXb);
 testXa_norm =  featureNormalize(testXa);
 testXb_norm =  featureNormalize(testXb);
-Ya_norm = featureRescale(Ya) - 1;
-Yb_norm = featureRescale(Yb) - 1;
+Ya_norm = featureRescale(Ya) * 0.5 + 0.5;
+Yb_norm = featureRescale(Yb) * 0.5 + 0.5;
 
 %Add The Bias Units
 
@@ -62,8 +62,8 @@ fprintf('Features Normalised. Initialise Thetas. Press Enter\n');
 ThetaA1 = abs(randInitializeWeights(10, 40));
 ThetaB1 = abs(randInitializeWeights(10, 40));
 
-ThetaA2 = abs(randInitializeWeights(40, 1));
-ThetaB2 = abs(randInitializeWeights(40, 1));
+ThetaA2 = abs(randInitializeWeights(40, 4));
+ThetaB2 = abs(randInitializeWeights(40, 4));
 
 % Calculate Thetas & Results For First Hidden Layer
 
@@ -89,25 +89,25 @@ JA += (sum(sum(ThetaA1(2:end, :) .^ 2)) + sum(sum(ThetaA1(2:end, :) .^ 2))) * (l
 figure(1)
 scatter(1:mTrainA, Ya, "b")
 hold on
-scatter(1:mTrainA, predictYaTrain, "r")
+scatter(1:mTrainA, predictYaTrain, "r", "x")
 hold off
 %{
 figure(2)
 scatter(1:mTrainB, Yb, "b")
 hold on
-scatter(1:mTrainB, predictYbTrain, "r")
+scatter(1:mTrainB, predictYbTrain, "r", "x")
 hold off
 %}
 figure(3)
 scatter(Xa(:, 2), Ya, "b")
 hold on
-scatter(Xa(:, 2), predictYaTrain, "r")
+scatter(Xa(:, 2), predictYaTrain, "r", "x")
 hold off
 %{
 figure(4)
 scatter(Xb(:, 2), Yb, "b")
 hold on
-scatter(Xb(:, 2), predictYbTrain, "r")
+scatter(Xb(:, 2), predictYbTrain, "r", "x")
 hold off
 %}
 predictYaValidate = forwardPropagate(validateXa_norm, ThetaA1, ThetaA2, Ya);
