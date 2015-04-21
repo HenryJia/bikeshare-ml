@@ -1,4 +1,4 @@
-function [ThetaA1, ThetaB1, ThetaA2, ThetaB2] = neural2_1
+function [ThetaA1, ThetaA2] = neural2_1
 %(scatterX, X, y, alpha, lambda, iter)
 
 % Load and normalise data
@@ -38,8 +38,6 @@ validateXa_norm =  featureNormalize(validateXa);
 validateXb_norm =  featureNormalize(validateXb);
 testXa_norm =  featureNormalize(testXa);
 testXb_norm =  featureNormalize(testXb);
-Ya_norm = featureRescale(Ya) * 0.5 + 0.5;
-Yb_norm = featureRescale(Yb) * 0.5 + 0.5;
 
 %Add The Bias Units
 
@@ -70,8 +68,8 @@ ThetaB2 = abs(randInitializeWeights(40, 4));
 fprintf('Thetas initialise. Training. Press Enter\n');
 %pause;
 
-[ThetaA1, ThetaA2] = train(Xa_norm, Ya_norm, ThetaA1, ThetaA2, alpha, lambda, iters, scatterIters);
-%[ThetaB1, ThetaB2] = train(Xa_norm, Ya_norm, ThetaB1, ThetaB2, alpha, lambda, iters, scatterIters);
+[ThetaA1, ThetaA2] = train(Xa_norm, Ya, ThetaA1, ThetaA2, alpha, lambda, iters, scatterIters);
+%[ThetaB1, ThetaB2] = train(Xb_norm, Yb, ThetaB1, ThetaB2, alpha, lambda, iters, scatterIters);
 
 fprintf('Training Complete. Calculate Training Costs. Press Enter\n');
 pause;

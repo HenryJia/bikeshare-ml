@@ -17,7 +17,7 @@ for i = 1:iters
 
     a2 = [ones(length(a2), 1), a2];
     z3 = a2 * TrainedTheta2;
-    a3 = sigmoid(z3);
+    a3 = z3;
 
     % For Debugging The Learning Algorithm Only (Line 10 And 56 As Well)
     %{    
