@@ -6,18 +6,18 @@ m = size(X, 1);
 
 TrainedTheta1 = Theta1;
 TrainedTheta2 = Theta2;
-
+Y = repmat(Y, 1, size(Theta2, 2));
 %count = 1;
 
 for i = 1:iters
 
     % Forward Propagation
     z2 = X * TrainedTheta1;
-    a2 = log(z2);
+    a2 = sigmoid(z2);
 
     a2 = [ones(length(a2), 1), a2];
     z3 = a2 * TrainedTheta2;
-    a3 = log(z3);
+    a3 = z3;
 
     % For Debugging The Learning Algorithm Only (Line 10 And 56 As Well)
     %{    
@@ -35,7 +35,7 @@ for i = 1:iters
     
     % Calculate small delta
     delta3 = a3 - Y;
-    delta2 = (delta3 * Theta2')(:, 2:end)  .* (1 ./ z2);
+    delta2 = (delta3 * Theta2')(:, 2:end)  .* sigmoidGradient(z2);
     %ds3 = size(delta3);
     %ds2 = size(delta2);
     % Accumulate small delta to calculate big delta which is the partial derivatives
