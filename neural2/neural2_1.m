@@ -20,8 +20,8 @@ testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 
 alpha = 0.015;
 lambda = 0;
-iters = 10000;
-scatterIters = 250;
+iters = 30000;
+scatterIters = 750;
 
 mTrainA = length(Ya);
 mTrainB = length(Yb);

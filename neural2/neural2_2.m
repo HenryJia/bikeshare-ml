@@ -20,8 +20,8 @@ testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 
 alpha = 0.015;
 lambda = 0;
-iters = 10000;
-scatterIters = 250;
+iters = 30000;
+scatterIters = 750;
 
 mTrainA = length(Ya);
 mTrainB = length(Yb);
@@ -73,7 +73,7 @@ fprintf('Thetas initialise. Training. Press Enter\n');
 
 %[ThetaA1, ThetaA2, ThetaA3] = train(Xa_norm, Ya, ThetaA1, ThetaA2, ThetaA3, alpha, lambda, iters, scatterIters);
 tic
-[ThetaB1, ThetaB2, ThetaB3] = train(Xa_norm, Yb, ThetaB1, ThetaB2, ThetaB3, alpha, lambda, iters, scatterIters);
+[ThetaB1, ThetaB2, ThetaB3] = train(Xb_norm, Yb, ThetaB1, ThetaB2, ThetaB3, alpha, lambda, iters, scatterIters);
 toc
 
 fprintf('Training Complete. Calculate Training Costs. Press Enter\n');
