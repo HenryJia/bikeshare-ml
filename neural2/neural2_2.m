@@ -18,7 +18,7 @@ testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 
 % Set Important Variables:
 
-alpha = 0.015;
+alpha = 0.01;
 lambda = 0;
 iters = 30000;
 scatterIters = 750;
@@ -63,8 +63,8 @@ ThetaB1 = abs(randInitializeWeights(10, 40));
 ThetaA2 = abs(randInitializeWeights(40, 160));
 ThetaB2 = abs(randInitializeWeights(40, 160));
 
-ThetaA3 = abs(randInitializeWeights(160, 1));
-ThetaB3 = abs(randInitializeWeights(160, 1));
+ThetaA3 = abs(randInitializeWeights(160, 16));
+ThetaB3 = abs(randInitializeWeights(160, 16));
 
 % Calculate Thetas & Results For First Hidden Layer
 
