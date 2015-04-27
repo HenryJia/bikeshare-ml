@@ -30,3 +30,11 @@ The version 3 of the sigmoidNeural3+ branch -> Same as version 2 but bigger and 
 JA = 223.8534764672244 JAValidate = 670.2424706468234 JB = 504.2598015271401 JBValidate = 1160.346418306346
 
 However, due to the fact that version 3 was overfitting the training set, I rolled it back to version 2 on the sigmoidNeural3+ branch.
+
+Due to the fact that version 2 on the sigmoidNeural3+ branch is the best workign alfgorithm, it has been merged into the master branch.
+
+Instructions:
+
+To run the algorithm, execute the function in neural2/neural2_1.m and neural2/neural2_2.m
+
+The scripts will then simulate a 4 layer neural network and calcualte the errors on the training and validation set and produce the predictions for kaggle's test set.
