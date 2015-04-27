@@ -5,20 +5,20 @@ function [ThetaA1, ThetaA2, ThetaA3] = neural2_1
 
 fprintf('Load Data\n');
 
-Xa = load("trainP7_1.csv")(:, [1, 3:end]);
-Xb = load("trainP7_2.csv")(:, [1, 3:end]);
+Xa = load("trainP7_1.csv");
+Xb = load("trainP7_2.csv");
 Ya = load("trainYP2_1.csv" );
 Yb = load("trainYP2_2.csv" );
-validateXa = load("validateP7_1.csv")(:, [1, 3:end]);
-validateXb = load("validateP7_2.csv")(:, [1, 3:end]);
+validateXa = load("validateP7_1.csv");
+validateXb = load("validateP7_2.csv");
 validateYa = load("validateY1.csv");
 validateYb = load("validateY2.csv");
-testXa = load("original/testPF1_1.csv")(:, [1, 3:end]);
-testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
+testXa = load("original/testPF1_1.csv");
+testXb = load("original/testPF1_2.csv");
 
 % Set Important Variables:
 
-alpha = 0.01;
+alpha = 0.0075;
 lambda = 0;
 iters = 30000;
 scatterIters = 750;
@@ -57,14 +57,14 @@ testXb_norm = [ones(size(testXb_norm, 1) ,1), testXb_norm];
 fprintf('Features Normalised. Initialise Thetas. Press Enter\n');
 %pause;
 
-ThetaA1 = abs(randInitializeWeights(10, 40));
-ThetaB1 = abs(randInitializeWeights(10, 40));
+ThetaA1 = abs(randInitializeWeights(11, 55));
+ThetaB1 = abs(randInitializeWeights(11, 55));
 
-ThetaA2 = abs(randInitializeWeights(40, 160));
-ThetaB2 = abs(randInitializeWeights(40, 160));
+ThetaA2 = abs(randInitializeWeights(55, 275));
+ThetaB2 = abs(randInitializeWeights(55, 275));
 
-ThetaA3 = abs(randInitializeWeights(160, 16));
-ThetaB3 = abs(randInitializeWeights(160, 16));
+ThetaA3 = abs(randInitializeWeights(275, 28));
+ThetaB3 = abs(randInitializeWeights(275, 28));
 
 % Calculate Thetas & Results For First Hidden Layer
 
@@ -131,6 +131,7 @@ predictYaTest = forwardPropagate(testXa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
 %predictYbTest = forwardPropagate(testXb_norm, ThetaB1, ThetaB2, ThetaB3. Yb);
 
 csvwrite("result2_1.csv", predictYaTest);
+csvwrite("JA.csv", [JA; JAValidate]);
 
 fprintf('Done. Press Enter\n');
 %pause;
