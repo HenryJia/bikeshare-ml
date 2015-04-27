@@ -32,3 +32,10 @@ JA =  562.68
 JAValidate =  743.38
 JB =  1071.0
 JBValidate =  1370.4
+
+The version 2 of the sigmoidNeural3+ branch -> sigmoid activated neural network just like the version 2 of the sigmoidNeural3+ branch but with 16 output units instead of 1. The end result of the output units are averaged.
+
+JA =  330.74
+JAValidate =  666.86
+JB =  673.13
+JBValidate =  1222.8
