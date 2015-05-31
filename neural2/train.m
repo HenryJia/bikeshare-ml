@@ -33,11 +33,13 @@ for i = 1:iters
         JAll(i / plotIters) = J;
     end
     
-    
+
     % Calculate small delta
     delta4 = a4 - Y;
-    delta3 = (delta4 * Theta3')(:, 2:end)  .* sigmoidGradient(z3);
-    delta2 = (delta3 * Theta2')(:, 2:end)  .* sigmoidGradient(z2);
+
+    delta3 = (delta4 * TrainedTheta3')(:, 2:end)  .* sigmoidGradient(z3);
+
+    delta2 = (delta3 * TrainedTheta2')(:, 2:end)  .* sigmoidGradient(z2);
 
     % Accumulate small delta to calculate big delta which is the partial derivatives
     Delta3 = delta4' * a3;
@@ -52,6 +54,8 @@ for i = 1:iters
     TrainedTheta1 = TrainedTheta1 - alpha * Theta1_grad;
     TrainedTheta2 = TrainedTheta2 - alpha * Theta2_grad;
     TrainedTheta3 = TrainedTheta3 - alpha * Theta3_grad;
+    
+    
 end
 figure(10)
 plot(JAll)
