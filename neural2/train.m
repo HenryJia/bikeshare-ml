@@ -51,10 +51,36 @@ for i = 1:iters
     Theta2_grad = Delta2' ./ m + (lambda/m) * [zeros(size(TrainedTheta2, 1), 1), TrainedTheta2(:, 2:end)];
     Theta1_grad = Delta1' ./ m + (lambda/m) * [zeros(size(TrainedTheta1, 1), 1), TrainedTheta1(:, 2:end)];
 
-    TrainedTheta1 = TrainedTheta1 - alpha * Theta1_grad;
-    TrainedTheta2 = TrainedTheta2 - alpha * Theta2_grad;
-    TrainedTheta3 = TrainedTheta3 - alpha * Theta3_grad;
+    %TrainedTheta1 = TrainedTheta1 - alpha * Theta1_grad;
+    %TrainedTheta2 = TrainedTheta2 - alpha * Theta2_grad;
+    %TrainedTheta3 = TrainedTheta3 - alpha * Theta3_grad;
+
+    %The derivative with respect to the output units is 1 so we simply elemtwise square the output of the previous layer to get the hessian (and divide by m).
+    hessdelta3 = ones(m, 1);
+    %hessDelta3 = sum(a3 .^ 2) / m;
+    hessDelta3 = hessdelta3' * (a3 .^ 2) / m;  
+    testhess1 = ((a4 - Y)' * a3 / m);
+
+    epsilon = 10 ^ (-5);
+
+    TrainedTheta3(2,1) = TrainedTheta3(2,1) + epsilon;
+
+    z2 = X * TrainedTheta1;
+    a2 = sigmoid(z2);
+
+    a2 = [ones(length(a2), 1), a2];
+    z3 = a2 * TrainedTheta2;
+    a3 = sigmoid(z3);
     
+    a3 = [ones(length(a3), 1), a3];
+    z4 = a3 * TrainedTheta3;
+    a4 = z4;
+
+    testhess2 = ((a4 - Y)' * a3 / m);
+
+    ((testhess2 - testhess1) / epsilon)(1,1:5)
+    hessDelta3(1,1:5)
+
     
 end
 figure(10)

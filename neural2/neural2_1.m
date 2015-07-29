@@ -19,7 +19,7 @@ testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 
 alpha = 0.00025;
 lambda = 0;
-iters = 100000;
+iters = 1;
 scatterIters = 1000;
 
 mTrainA = length(Ya);
@@ -47,7 +47,7 @@ testXa_norm = [ones(size(testXa_norm, 1) ,1), testXa_norm];
 
 fprintf('Features Normalised. Initialise Thetas. Press Enter\n');
 
-ThetaA1 = abs(randInitializeWeights(10, 40))
+ThetaA1 = abs(randInitializeWeights(10, 40));
 ThetaA2 = abs(randInitializeWeights(40, 160));
 ThetaA3 = abs(randInitializeWeights(160, 1));
 
