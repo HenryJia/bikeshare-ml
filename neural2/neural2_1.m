@@ -18,8 +18,9 @@ testXb = load("original/testPF1_2.csv")(:, [1, 3:end]);
 % Set Important Variables:
 
 alpha = 0.00025;
+mu = 10 ^ (-15);
 lambda = 0;
-iters = 10;
+iters = 50;
 scatterIters = 1;
 
 mTrainA = length(Ya);
@@ -56,7 +57,7 @@ ThetaA3 = abs(randInitializeWeights(160, 1));
 fprintf('Thetas initialise. Training. Press Enter\n');
 
 tic
-[ThetaA1, ThetaA2, ThetaA3] = train(Xa_norm, Ya, ThetaA1, ThetaA2, ThetaA3, alpha, lambda, iters, scatterIters);
+[ThetaA1, ThetaA2, ThetaA3] = train(Xa_norm, Ya, ThetaA1, ThetaA2, ThetaA3, alpha, mu, lambda, iters, scatterIters);
 toc
 
 fprintf('Training Complete. Calculate Costs. Press Enter\n');
@@ -64,7 +65,7 @@ pause;
 
 predictYaTrain = forwardPropagate(Xa_norm, ThetaA1, ThetaA2, ThetaA3, Ya);
 
-JA = ((predictYaTrain - Ya)' * (predictYaTrain - Ya) )/ (2 * mTrainA);
+JA = sum(sum((predictYaTrain - Ya) .^ 2))/ (2 * mTrainA);
 
 % Add on the penalty for regularization
 JA += (sum(sum(ThetaA1(2:end, :) .^ 2)) + sum(sum(ThetaA2(2:end, :) .^ 2)) + sum(sum(ThetaA3(2:end, :) .^ 2))) * (lambda / (2 * mTrainA))
